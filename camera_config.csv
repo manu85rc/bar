@@ -1,0 +1,15 @@
+Property,Value,Description
+Camera IP,192.168.100.50,IP address of the camera
+ONVIF Port,8899,Port for ONVIF services
+RTSP Port,554,Port for RTSP stream
+Username,admin,Username for authentication
+Password,admin,Password for authentication
+Model,XM232_X6S-WEQ-H_8M,Camera model
+Firmware Version,V5.02.C01.000A19WS.10010.346543.S.ONVIF 21.06,Firmware version
+Serial Number,969c38b51c994f492rhc,Device serial number
+Snapshot URL,http://192.168.100.50:8899/webcapture.jpg?command=snap&channel=0,URL for instant JPEG snapshot
+RTSP Stream URL (Profile 002),rtsp://192.168.100.50:554/user=admin_password=tlJwpbo6_channel=0_stream=2.sdp?real_stream,RTSP stream URI for profile 002
+HTTP Stream URL (Profile 002),http://192.168.100.50:80/user=admin_password=tlJwpbo6_channel=0_stream=2.sdp?real_streamm,HTTP stream URI for profile 002
+Profile Token 000,000,Main stream profile (high resolution)
+Profile Token 001,001,Sub stream profile (low resolution)
+Profile Token 002,002,Snapshot stream profile

@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MesaController;
 use App\Http\Controllers\ReservaController;
-use App\Http\Controllers\PedidoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,18 +46,13 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Admin routes (admin only)
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/test-admin-no-middleware', function () { return 'Test admin no middleware'; });
+    Route::middleware(['role:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/test-admin', function () { return 'Test admin route'; });
         Route::get('/dashboard', [App\Http\Controllers\Admin\AdminController::class, 'dashboard'])->name('dashboard');
-        Route::resource('/users', App\Http\Controllers\Admin\AdminController::class)->except(['show']);
+        Route::resource('/users', App\Http\Controllers\Admin\AdminController::class)->except(['show', 'edit', 'update']);
     });
 
     // Reserva routes (authenticated users)
     Route::resource('/reservas', ReservaController::class)->except(['show']);
-
-    // Pedido routes (authenticated users - camareros)
-    Route::resource('/pedidos', PedidoController::class)->except(['show']);
-    Route::put('/pedidos/{pedido}/estado', [PedidoController::class, 'updateEstado'])->name('pedidos.updateEstado');
 });
 Route::get('/test', function () { return 'test'; });

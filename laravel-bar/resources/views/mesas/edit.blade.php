@@ -4,7 +4,7 @@
 <div class="max-w-md mx-auto mt-10 bg-white rounded-lg shadow-md overflow-hidden">
     <div class="px-6 py-4">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-bold text-gray-800">Crear Mesa</h2>
+            <h2 class="text-2xl font-bold text-gray-800">Editar Mesa</h2>
             <a href="{{ route('mesas.index') }}" class="text-sm text-indigo-600 hover:text-indigo-500">
                 Volver a la lista
             </a>
@@ -20,8 +20,9 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('mesas.store') }}">
+        <form method="POST" action="{{ route('mesas.update', $mesa->id) }}">
             @csrf
+            @method('PUT')
 
             <div class="mb-4">
                 <label for="numero" class="block text-gray-700 text-sm font-bold mb-2">
@@ -32,7 +33,7 @@
                        id="numero"
                        required
                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                       value="{{ old('numero') }}">
+                       value="{{ old('numero', $mesa->numero) }}">
                 @if ($errors->has('numero'))
                     <span class="text-red-500 text-sm block mt-1">{{ $errors->first('numero') }}</span>
                 @endif
@@ -48,7 +49,7 @@
                        required
                        min="1"
                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                       value="{{ old('capacidad') }}">
+                       value="{{ old('capacidad', $mesa->capacidad) }}">
                 @if ($errors->has('capacidad'))
                     <span class="text-red-500 text-sm block mt-1">{{ $errors->first('capacidad') }}</span>
                 @endif
@@ -62,7 +63,7 @@
                        name="ubicacion"
                        id="ubicacion"
                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                       value="{{ old('ubicacion') }}">
+                       value="{{ old('ubicacion', $mesa->ubicacion) }}">
                 @if ($errors->has('ubicacion'))
                     <span class="text-red-500 text-sm block mt-1">{{ $errors->first('ubicacion') }}</span>
                 @endif
@@ -85,10 +86,10 @@
                                     document.getElementById('disponible').value = 1;
                                 }
                             "
-                            {{ old('disponible', true) ? 'class="bg-green-100 text-green-800"' : 'class="bg-red-100 text-red-800"' }}>
-                        {{ old('disponible', true) ? 'Sí' : 'No' }}
+                            {{ $mesa->disponible ? 'class="bg-green-100 text-green-800"' : 'class="bg-red-100 text-red-800"' }}>
+                        {{ $mesa->disponible ? 'Sí' : 'No' }}
                     </button>
-                    <input type="hidden" name="disponible" id="disponible" value="{{ old('disponible', true) ? 1 : 0 }}">
+                    <input type="hidden" name="disponible" id="disponible" value="{{ $mesa->disponible ? 1 : 0 }}">
                 </div>
                 @if ($errors->has('disponible'))
                     <span class="text-red-500 text-sm block mt-1">{{ $errors->first('disponible') }}</span>
@@ -98,7 +99,7 @@
             <div class="mt-6">
                 <button type="submit"
                         class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline">
-                    Crear Mesa
+                    Actualizar Mesa
                 </button>
             </div>
         </form>
