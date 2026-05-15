@@ -5,7 +5,7 @@
     <div class="px-4 py-6 sm:px-0">
         <div class="border-4 border-dashed border-gray-200 rounded-lg h-full">
             <div class="mb-6">
-                <h2 class="text-2xl font-semibold text-gray-900">Crear Nuevo Producto</h2>
+                <h2 class="text-2xl font-semibold text-gray-900">Editar Producto</h2>
             </div>
 
             @if ($errors->any())
@@ -18,12 +18,12 @@
                 </div>
             @endif
 
-            <form action="{{ route('admin.productos.store') }}" method="POST" class="space-y-6">
+            <form action="{{ route('admin.productos.update', ) }}" method="POST" @method('PUT') class="space-y-6">
                 @csrf
 
                 <div>
                     <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
-                    <input type="text" name="nombre" id="nombre" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" value="{{ old('nombre') }}" required>
+                    <input type="text" name="nombre" id="nombre" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" value="{{ old('nombre', ->nombre) }}" required>
                 </div>
 
                 <div>
